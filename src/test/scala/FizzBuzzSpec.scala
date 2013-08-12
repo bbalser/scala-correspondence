@@ -9,6 +9,9 @@ class FizzBuzzSpec extends FunSuite with ShouldMatchers {
     fizzbuzz(1) should be ("1")
   }
 
+  test("2 returns 2") {
+    fizzbuzz(2) should be ("2")
+  }
 
 
 }
