@@ -4,8 +4,8 @@ import org.scalatest.matchers.ShouldMatchers
 class FizzBuzzSpec extends FunSuite with ShouldMatchers {
 
   def fizzbuzz(n: Int):String = n match {
-    case x if (x % 3 == 0) => "fizz"
-    case 5 => "buzz"
+    case x if x % 3 == 0 => "fizz"
+    case x if x % 5 == 0 => "buzz"
     case x => x.toString
   }
 
@@ -29,8 +29,12 @@ class FizzBuzzSpec extends FunSuite with ShouldMatchers {
     fizzbuzz(6) should be ("fizz")
   }
 
-  test("10 returns buss") {
+  test("10 returns buzz") {
     fizzbuzz(10) should be ("buzz")
+  }
+
+  test("15 returns fizzbuzz") {
+    fizzbuzz(15) should be ("fizzbuzz")
   }
 
 }
