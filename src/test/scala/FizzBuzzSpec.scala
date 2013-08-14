@@ -3,10 +3,25 @@ import org.scalatest.matchers.ShouldMatchers
 
 class FizzBuzzSpec extends FunSuite with ShouldMatchers {
 
+  object Fizz {
+    def unapply(n: Int): Boolean = n % 3 == 0
+  }
+
+  object Buzz {
+    def unapply(n: Int): Boolean = n % 5 == 0
+  }
+
+  object FizzBuzz {
+    def unapply(n: Int): Boolean = (n,n) match {
+      case (Fizz(), Buzz()) => true
+      case _ => false
+    }
+  }
+
   def fizzbuzz(n: Int):String = n match {
-    case x if x % 15 == 0 =>"fizzbuzz"
-    case x if x % 3 == 0 => "fizz"
-    case x if x % 5 == 0 => "buzz"
+    case FizzBuzz() =>"fizzbuzz"
+    case Fizz() => "fizz"
+    case Buzz() => "buzz"
     case x => x.toString
   }
 
