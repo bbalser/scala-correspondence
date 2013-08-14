@@ -1,3 +1,1 @@
-I think your original idea to pass then immediately write another test is better.  No explicit steps for refactor - just refactor at will.
-
-sounds good - Brian
+I think this worked.  I'm ready for a significant Kata.
