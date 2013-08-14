@@ -5,6 +5,7 @@ class FizzBuzzSpec extends FunSuite with ShouldMatchers {
 
   def fizzbuzz(n: Int):String = n match {
     case 3 => "fizz"
+    case 5 => "buzz"
     case x => x.toString
   }
 
@@ -22,6 +23,10 @@ class FizzBuzzSpec extends FunSuite with ShouldMatchers {
 
   test("5 returns buzz") {
     fizzbuzz(5) should be ("buzz")
+  }
+
+  test("6 returns fizz") {
+    fizzbuzz(6) should be ("fizz")
   }
 
 }
