@@ -1,4 +1,4 @@
-name := """fizz-buzz-1"""
+name := """scala-correspondence"""
 
 version := "1.0"
 
