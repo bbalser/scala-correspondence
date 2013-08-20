@@ -3,7 +3,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 class PotterTests extends FunSuite with ShouldMatchers {
 
-  def determinePrice(books:List[Int]):Double = 8 * books.size * (if (books.toSet.size == 2) 0.95 else 1.00)
+  def determinePrice(books:List[Int]):Double = 8 * books.size * (if (books.toSet.size == 2) 0.95 else if (books.toSet.size == 3) 0.90 else 1.00)
 
   test("price of 1 book is 8") {
     determinePrice(List(1)) should be (8)
