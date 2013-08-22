@@ -3,21 +3,20 @@ import org.scalatest.matchers.ShouldMatchers
 
 class PotterTests extends FunSuite with ShouldMatchers {
 
+  val SET_PRICE = Array(
+    0,
+    8 * 1 * 1.00,
+    8 * 2 * 0.95,
+    8 * 3 * 0.90,
+    8 * 4 * 0.80,
+    8 * 5 * 0.75
+  )
+
   def determinePrice(books:List[Int]):Double = {
-
-    def setPrice(set:Set[Int]) =
-      8 * set.size * (set.size match {
-        case 5 => 0.75
-        case 4 => 0.80
-        case 3 => 0.90
-        case 2 => 0.95
-        case _ => 1.00
-      })
-
     val set1 = books.toSet
     val set2 = (books diff set1.toList).toSet
 
-    setPrice(set1) + setPrice(set2)
+    SET_PRICE(set1.size) + SET_PRICE(set2.size)
   }
 
   test("price of 1 book is 8") {
