@@ -59,4 +59,8 @@ class PotterTests extends FunSuite with ShouldMatchers {
     determinePrice(List(1,2,1,2)) should be ((16 * 0.95) + (16 * 0.95))
   }
 
+  test("the gotcha") {
+    determinePrice(List(1,1,2,2,3,3,4,5)) should be (51.20)
+  }
+
 }
