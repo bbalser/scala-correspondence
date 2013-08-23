@@ -53,4 +53,8 @@ class PotterTests extends FunSuite with ShouldMatchers {
     determinePrice(List(1,1,1,2)) should be ((16 * 0.95) + 8 + 8)
   }
 
+  test("price of 2 unique sets of 2 should be") {
+    determinePrice(List(1,2,1,2)) should be ((16 * 0.95) + (16 * 0.95))
+  }
+
 }
