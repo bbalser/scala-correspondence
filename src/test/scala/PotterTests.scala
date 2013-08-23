@@ -16,9 +16,10 @@ class PotterTests extends FunSuite with ShouldMatchers {
 
   def determinePrice(books:List[Int]):Double = {
     val set1 = books.toSet
-    val remainingBooks = (books diff set1.toList)
+    val set2 = (books diff set1.toList).toSet
+    val set3 = (books diff set1.toList diff set2.toList).toSet
 
-    SET_PRICE(set1.size) + (remainingBooks.size * BASE_BOOK_PRICE)
+    SET_PRICE(set1.size) + SET_PRICE(set2.size) + SET_PRICE(set3.size)
   }
 
   test("price of 1 book is 8") {
