@@ -4,6 +4,7 @@ import org.scalatest.matchers.ShouldMatchers
 class PotterTests extends FunSuite with ShouldMatchers {
 
   val BASE_BOOK_PRICE = 8
+  type Order = List[Set[Int]]
   
   val SET_PRICE = Array(
     0,
@@ -14,14 +15,34 @@ class PotterTests extends FunSuite with ShouldMatchers {
     BASE_BOOK_PRICE * 5 * 0.75
   )
 
-  def determinePrice(books:List[Int]):Double = {
-    if (books.size == 0)
-      0
-    else {
-      val set = books.toSet
-      SET_PRICE(set.size) + determinePrice(books diff set.toList)
+  def determinePrice(books: List[Int]):Double = {
+
+    def processBooks(books: List[Int], order: Order): Order = {
+      if (books.isEmpty) {
+        order
+      } else if (order.isEmpty) {
+        processBooks(books.tail, order :+ Set(books.head))
+      } else {
+
+        val possibleOrders = createAllPossibleOrders(order, books.head)
+        val bestOrder = possibleOrders.view.map(x => (x,priceOfOrder(x)) ).minBy(_._2)._1
+        processBooks(books.tail, bestOrder)
+      }
+    }
+
+    priceOfOrder(processBooks(books, Nil))
+  }
+
+  def createAllPossibleOrders(order: Order, book: Int) = order.view.zipWithIndex.map{ case (set, index) =>
+    if (!set.contains(book)) {
+      order.patch(index, List(set + book), 1)
+    } else {
+      order :+ Set(book)
     }
   }
+
+  def priceOfOrder(order: Order): Double = order.map(x => SET_PRICE(x.size)).sum
+
 
   test("price of 1 book is 8") {
     determinePrice(List(1)) should be (8)
